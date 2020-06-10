@@ -25,22 +25,22 @@
     </head>
 
     <body>
-    <h1>A collapse in output followed by a slow recovery</h1>
-    <h2>World GDP, index 2019-Q4=100</h2>
+    <h1>Produktionseinbruch mit anschließender leichter Erholung</h1>
+    <h2>Welt-BIP, Index Q4 2019=100</h2>
     <img id="Play" src="img/triangle-right.svg" alt="Play button">
     <img id="Share" src="img/share.svg" alt="share">
     <div id="scenario" alt=""></div>
-    <div id="source" class="source">Source: <a class="source" href="https://doi.org/10.1787/eo-data-en" target="_blank">OECD (2020), "OECD
+    <div id="source" class="source">Quelle: <a class="source" href="https://doi.org/10.1787/eo-data-en" target="_blank">OECD (2020), "OECD
             Economic Outlook No. 107 (Edition 2020/1)", OECD Economic Outlook: Statistics and Projections (database)</a>. </div>
     <div id="shareLink">
         <div id="shutterholdertracker">
             <img id="shuttershare" src="img/cross.svg">
             <div id="trackersText">
                 <b>Copy link:</b><Br />
-                <span>https://gitvfd.github.io/EO-Outlook_chart_2/</span><Br />
+                <span>https://oecd.github.io/EO-Outlook_chart_2-de/</span><Br />
                 <b>Embed link:</b><Br />
                 <textarea
-                    readonly><iframe src="https://gitvfd.github.io/EO-Outlook_chart_2/" width="100%" height="500px" style="border:none;"></iframe></textarea>
+                    readonly><iframe src="https://oecd.github.io/EO-Outlook_chart_2-de/" width="100%" height="500px" style="border:none;"></iframe></textarea>
     
             </div>
         </div>
@@ -59,7 +59,7 @@
     var divMap = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0); 
-    var color = ["#32A674", "#0B68AF", "#E73741", "#E1B400","#993484",  "#DF521E", "#719E24"];
+    var color = ["#32A674", "#993484", "#E73741", "#E1B400","#993484",  "#DF521E", "#719E24"];
 
     var margin = { top: 70, right: 50, bottom: 30, left: 40 };
 
@@ -73,12 +73,12 @@
 
     if (width > 650){
             height = 290;//height = width * mapRatio;
-            lagText = 40;
+            lagText = 10;
 
     }
     else{
         height = 290;//height = width;
-        lagText = 10;
+        lagText = 1;
     }
 
 
@@ -157,13 +157,13 @@
 
                     // return appropriate quarter for that month
                     if (mon <= 2) {
-                        return yr + "-Q1";
+                        return "Q1 " + yr ;
                     } else if (mon <= 5) {
-                        return yr + "-Q2";
+                        return "Q2 " + yr ;
                     } else if (mon <= 8) {
-                        return yr + "-Q3";
+                        return "Q3 " + yr ;
                     } else {
-                        return yr + "-Q4";
+                        return "Q4 " + yr ;
                     }
                 }));
 
@@ -185,7 +185,7 @@
             .append("path")
             .attr("fill", "none"/*"#8DCD79"*/)
             .attr("stroke", function (d) { return color[0] })
-            .attr("stroke-width","4px")
+            .attr("stroke-width", "5px")
            // .attr("opacity", function () { if (k == 0) return 0.1; else return 1; })
             .attr("class", "lineContext")
             //.attr("id", function (d) { return "doubleHit" + i; })
@@ -206,7 +206,7 @@
             .attr("x", function (d) { return x(dateParser("2019-Q1")) +lagText })
             .attr("y", function (d) { height })
             .attr("class", "explanatory")
-            .text("This is the quarterly evolution of global GDP in 2019")
+            .text("Dargestellt ist hier die Quartalsentwicklung des Welt-BIP im Jahr 2019")
             .transition().delay(4700).remove()
 
 
@@ -216,7 +216,7 @@
             .append("path")
             .attr("fill", "none")
             .attr("stroke", function (d) { return color[0] })
-            .attr("stroke-width", "4px")
+            .attr("stroke-width", "5px")
             .attr("opacity",0.5)
             .attr("d", function (d) {
                 return d3.line()//area
@@ -232,7 +232,7 @@
             scenarioSVG
                 .append("path")
                 .attr("fill", "none")
-                .attr("stroke-width", "4px")
+                .attr("stroke-width", "5px")
                 .attr("class","forecast")
                 .transition().delay(7500)
                 .attr("d", function (d) {
@@ -249,7 +249,7 @@
                 .attr("y", function (d) { height })
                 .attr("class", "explanatory")
                 .transition().delay(500).duration(500)
-                .text("and how - back in November 2019 - we estimated it would grow")
+                .text("und der weitere Wachstumsverlauf, mit dem wir im November 2019 gerechnet hatten")
                 .transition().delay(2500).duration(200).remove()
 
             scenarioSVG.append("text")
@@ -257,7 +257,7 @@
                 .attr("y", function (d) { height })
                 .attr("class", "explanatory")
                 .transition().delay(4000).duration(500)
-                .text("The Covid-19 crisis led us to drastically revise our forecasts")
+                .text("Wegen der Corona-Krise mussten wir diese Prognose drastisch korrigieren")
                 .transition().delay(3000).duration(200).remove()
         }
 
@@ -266,7 +266,7 @@
                 .append("path")
                 .attr("fill", "none")
                 .attr("stroke", function (d) { return color[1] })
-                .attr("stroke-width", "4px")
+                .attr("stroke-width", "5px")
                 .attr("d", function (d) {
                     return d3.line()//area
                         .x(function (d) { return x(dateParser(d.TIME)); })
@@ -281,7 +281,7 @@
             scenarioSVG
                 .append("path")
                 .attr("fill", "none")
-                .attr("stroke-width", "4px")
+                .attr("stroke-width", "5px")
                 .attr("class", "forecast")
                 .transition().delay(6500)
                 .attr("d", function (d) {
@@ -298,7 +298,7 @@
                 .attr("y", function (d) { height })
                 .attr("class", "explanatory")
                 .transition().delay(500).duration(500)
-                .text("the blue line shows our forecasts with only one Covid-19 episode")
+                .text("Violette Kurve: Prognose mit nur einer Corona-Welle")
                 .transition().delay(5500).duration(200).remove()
 
         } 
@@ -310,7 +310,7 @@
                 .append("path")
                 .attr("fill", "none")
                 .attr("stroke", function (d) { return color[2] })
-                .attr("stroke-width", "4px")
+                .attr("stroke-width", "5px")
                 .attr("d", function (d) {
                     return d3.line()//area
                         .x(function (d) { return x(dateParser(d.TIME)); })
@@ -325,7 +325,7 @@
             scenarioSVG
                 .append("path")
                 .attr("fill", "none")
-                .attr("stroke-width", "4px")
+                .attr("stroke-width", "5px")
                 .attr("class", "forecast")
                 .transition().delay(7500)
                 .attr("d", function (d) {
@@ -342,7 +342,7 @@
                 .attr("y", function (d) { height })
                 .attr("class", "explanatory")
                 .transition().delay(500).duration(500)
-                .text("the red line shows GDP if a second major wave of infections hits before year-end")
+                .text("Rote Kurve: BIP-Entwicklung im Fall einer 2. Welle vor Jahresende")
                 .transition().delay(6500).duration(200).remove()
 
             }
@@ -353,7 +353,7 @@
             const annotation2019 = [
                 {
                     note: {
-                        label: "November 2019 forecasts"
+                        label: "Projektionen von November 2019"
                     },
                     x: x(dateParser("2021-Q1")),
                     y: y(annotationMark[0].forecast2019),
@@ -364,23 +364,23 @@
             const annotationSingle = [
                 {
                     note: {
-                        label: "Single-hit scenario"
+                        label: "Single-Hit-Szenario"
                         
                     },
                     x: x(dateParser("2021-Q1")),
                     y: y(annotationMark[0].singleHit),
-                    dy: -50,
+                    dy: -30,
                     dx: -50
                 }
             ]
             const annotationDouble = [
                 {
                     note: {
-                        label: "Double-hit scenario"
+                        label: "Double-Hit-Szenario"
                     },
                     x: x(dateParser("2021-Q1")),
                     y: y(annotationMark[0].doubleHit),
-                    dy: 40,
+                    dy: 30,
                     dx: 20
                 }
             ]
@@ -411,7 +411,7 @@
                 .attr("y", function (d) { height })
                 .attr("class", "explanatory")
                 .transition().delay(500).duration(500)
-                .text("In both scenarios, we won't be back at 2019-Q4 level for at least 2 years")
+                .text("In beiden Szenarien dauert es mindestens zwei Jahre, bis das BIP-Niveau des 4Q-2019 wieder erreicht ist")
             
             document.getElementById("Play").style.display = "inline-block";
 
